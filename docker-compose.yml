@@ -1,0 +1,27 @@
+version: '3'
+
+volumes:
+  data:
+
+services:
+  nginx1:
+    image: nginx
+    ports:
+      - '127.0.0.1:80:80'
+    volumes:
+      - type: volume
+        source: data
+        target: /tmp
+      - type: bind
+        source: ./templates/nginx1
+        target: /etc/nginx/templates
+
+  nginx2:
+    image: nginx
+    volumes:
+      - type: volume
+        source: data
+        target: /tmp
+      - type: bind
+        source: ./templates/nginx2
+        target: /etc/nginx/templates
